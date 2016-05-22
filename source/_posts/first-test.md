@@ -8,13 +8,11 @@ categories:
 - 第一个
 ---
 
-this is a test file for hexo new post
-
-hahah
 Hexo 是高效的静态站点生成框架，她基于 Node.js。 通过 Hexo 你可以轻松地使用
 Markdown 编写文章，除了 Markdown 本身的语法之外，还可以使用 Hexo 提供的 标签插件
 来快速的插入特定形式的内容。在这篇文章中，假定你已经成功安装了 Hexo，并使用 Hexo
 提供的命令创建了一个站点。
+<!-- more -->
 
 你可以访问 Hexo 的文档 了解如何安装 Hexo
 在 Hexo 中有两份主要的配置文件，其名称都是 _config.yml。
