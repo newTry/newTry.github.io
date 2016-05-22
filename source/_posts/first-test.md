@@ -4,6 +4,8 @@ date: 2016-05-22 16:13:15
 tags: 
 - hello
 - world 
+categories: 
+- 第一个
 ---
 
 this is a test file for hexo new post
