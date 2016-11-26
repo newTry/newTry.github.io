@@ -42,13 +42,31 @@ Markdown 编写文章，除了 Markdown 本身的语法之外，还可以使用 
     categories:
     - hexo
 
+### 文章描述模板添加
+
+如想添加一个新的文章类型，如photo文章，首先在scaffolds文件夹下touch photo.md,在photo.md中添加如下内容（模板）：
+
+    ---
+    layout: { { layout } }
+    title: { { title } }
+    date: { { date } }
+    tags: 
+    photos: 
+    ---
+
+保存后，即可使用该模板。
+使用方式：hexo new photo 'filename'
+
 ## 清理
+
 当显示标签个数与实际不符合时，需要清理hexo，并重新编译
     删除db.json .deploy_git 并执行下列命令 
     hexo clean  #清理缓存
     hexo g      #重新编译，生成
     hexo s      #启动服务，本地调试
     hexo d      #部署到服务器
+
+## 部署
 
 通过命令hexo g -d 可以将本地的hexo源文件编译为网站站点,并根据_config.xml中的配置将编译后的网站站点文件推送到目标仓库。
     # Deployment

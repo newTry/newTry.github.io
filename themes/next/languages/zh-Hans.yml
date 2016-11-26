@@ -21,8 +21,8 @@ sidebar:
 
 post:
   sticky: 置顶
-  posted: 发表于
-  in: 分类于
+  posted: 发表时间
+  in: 分类
   visitors: 阅读次数
   read_more: 阅读全文
   untitled: 未命名
@@ -33,20 +33,20 @@ page:
   tags: 标签
 
 footer:
-  powered: "由 %s 强力驱动"
+  powered: "powered by wuxiaohu@youzan.com"
   theme: 主题
 
 
 counter:
   tag_cloud:
     zero: 暂无标签
-    one: 目前共计 1 个标签
-    other: "目前共计 %d 个标签"
+    one: ""
+    other: ""
 
   categories:
     zero: 暂无分类
-    one: 目前共计 1 个分类
-    other: "目前共计 %d 个分类"
+    one: ""
+    other: ""
 
   archive_posts:
     zero: 暂无日志。
