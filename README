@@ -1,0 +1,2 @@
+这是个人博客项目
+源码放在hexo分支上，master分支是有hexo分支源码通过hexo g -d 命令生成并推送到origin/master上。因此不存在本地master分支。
