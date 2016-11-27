@@ -10,6 +10,7 @@ description: 晓虎的个人博客
 author: Xiaohu
 language: zh-Hans
 timezone:
+avatar: /images/touxiang.jpg
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
