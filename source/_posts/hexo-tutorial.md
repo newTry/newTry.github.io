@@ -1,6 +1,8 @@
 ---
 title: hexo 使用教程
 date: 2016-05-22 16:13:15
+description: hexo 的使用教程
+keywords: hexo,教程,nodejs,Markdown
 tags: 
 - hexo 
 - 教程
