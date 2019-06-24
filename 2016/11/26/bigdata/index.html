@@ -1,0 +1,647 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="大数据,hadoop,数据仓库," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="这篇文章是5月份写的。 进入 有赞 已经2个多月了。目前待在大数据组，虽然还没有开始接触数据开发相应的工作，但在这样的部门中，对数据开发多少有些涉猎，且接下来会慢慢接触到真正的数据开发工作。最近在赶项目的同时，抽空恶补大数据的知识，略有所得，今天就来谈谈我对大数据的认识。 数据的产生当系统到达一定的程度时，会有大量的数据产生，针对这些数据的存储，读取，分析，挖掘等都需要有一套机制。这个就是现在比较">
+<meta name="keywords" content="大数据,hadoop,数据仓库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据平台">
+<meta property="og:url" content="http://yoursite.com/2016/11/26/bigdata/index.html">
+<meta property="og:site_name" content="Xiaohu の Blog">
+<meta property="og:description" content="这篇文章是5月份写的。 进入 有赞 已经2个多月了。目前待在大数据组，虽然还没有开始接触数据开发相应的工作，但在这样的部门中，对数据开发多少有些涉猎，且接下来会慢慢接触到真正的数据开发工作。最近在赶项目的同时，抽空恶补大数据的知识，略有所得，今天就来谈谈我对大数据的认识。 数据的产生当系统到达一定的程度时，会有大量的数据产生，针对这些数据的存储，读取，分析，挖掘等都需要有一套机制。这个就是现在比较">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2016-11-27T16:35:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据平台">
+<meta name="twitter:description" content="这篇文章是5月份写的。 进入 有赞 已经2个多月了。目前待在大数据组，虽然还没有开始接触数据开发相应的工作，但在这样的部门中，对数据开发多少有些涉猎，且接下来会慢慢接触到真正的数据开发工作。最近在赶项目的同时，抽空恶补大数据的知识，略有所得，今天就来谈谈我对大数据的认识。 数据的产生当系统到达一定的程度时，会有大量的数据产生，针对这些数据的存储，读取，分析，挖掘等都需要有一套机制。这个就是现在比较">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 大数据平台 | Xiaohu の Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xiaohu の Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                大数据平台
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表时间</span>
+            <time itemprop="dateCreated" datetime="2016-11-26T15:06:03+08:00" content="2016-11-26">
+              2016-11-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">阅读次数
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <pre><code>这篇文章是5月份写的。
+</code></pre><p>进入 <a href="https://www.youzan.com" target="_blank" rel="noopener"><code>有赞</code></a> 已经2个多月了。目前待在大数据组，虽然还没有开始接触数据开发相应的工作，但在这样的部门中，对数据开发多少有些涉猎，且接下来会慢慢接触到真正的数据开发工作。最近在赶项目的同时，抽空恶补大数据的知识，略有所得，今天就来谈谈我对大数据的认识。</p>
+<h1 id="数据的产生"><a href="#数据的产生" class="headerlink" title="数据的产生"></a>数据的产生</h1><p>当系统到达一定的程度时，会有大量的数据产生，针对这些数据的存储，读取，分析，挖掘等都需要有一套机制。这个就是现在比较火的大数据。</p>
+<h1 id="系统数据的分类"><a href="#系统数据的分类" class="headerlink" title="系统数据的分类"></a>系统数据的分类</h1><p>在大型系统中，数据来源主要有两部分，一部分是系统的业务数据，另一部分是用户的行为数据。针对这两种不同的数据，有相应的两种存储形式，对于业务数据，一般来说是存放在数据库中，如关系型数据库mysql、oracle，非关系型数据库mongodb、redis等，而对于用户的行为数据则是以日志的形式进行存储。</p>
+<h2 id="业务数据"><a href="#业务数据" class="headerlink" title="业务数据"></a>业务数据</h2><p>业务数据一般来说，是用户在使用系统时，需要并产生的一些数据。如创建一个店铺，在店铺中上架商品，商品卖出去会有订单，根据订单进行发货会产生物流信息等等，这些都是用户在使用过程中产生的业务数据。这部分数据会存放在数据库中。</p>
+<h2 id="用户行为数据"><a href="#用户行为数据" class="headerlink" title="用户行为数据"></a>用户行为数据</h2><p>用户在访问网站时留下的行为轨迹数据。如从一个页面跳到另一个页面，访问页面过程中的点击行为，浏览行为等等。这部分数据以日志形式存在，保留和使用。</p>
+<h1 id="大数据平台组件"><a href="#大数据平台组件" class="headerlink" title="大数据平台组件"></a>大数据平台组件</h1><p>做的更多的事情是 olap 。</p>
+<p>hadoop - hdfs、MapReduce</p>
+<p>数据仓库 - hive</p>
+<p>列式数据库 - hbase</p>
+<p>日志搜集组件 - flume logstash</p>
+<p>分布式消息系统 - kafka</p>
+<p>流数据处理 - storm spark kylin</p>
+<p>nosql数据库 - redis、mongodb</p>
+<h1 id="公司大数据业务线"><a href="#公司大数据业务线" class="headerlink" title="公司大数据业务线"></a>公司大数据业务线</h1><p>搜索<br>风控<br>算法<br>报表<br>线上数据中心</p>
+<h1 id="平台架构"><a href="#平台架构" class="headerlink" title="平台架构"></a>平台架构</h1><ul>
+<li>数据来源 （数据源，mysql、日志、binlog）</li>
+<li>数据统一接入（kafka）</li>
+<li>数据etl与计算</li>
+<li>数据存储 （hdfs）</li>
+<li>数据计算（离线hive等，实时storm、kylin、spark等）</li>
+<li>数据服务层 （对外提供服务）</li>
+<li>数据应用（业务层）</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/大数据/" rel="tag">#大数据</a>
+          
+            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
+          
+            <a href="/tags/数据仓库/" rel="tag">#数据仓库</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/26/netty/" rel="next" title="netty 学习笔记">
+                <i class="fa fa-chevron-left"></i> netty 学习笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/26/java-nio/" rel="prev" title="java-nio">
+                java-nio <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/touxiang.jpg"
+               alt="Xiaohu" />
+          <p class="site-author-name" itemprop="name">Xiaohu</p>
+          <p class="site-description motion-element" itemprop="description">晓虎的个人博客</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据的产生"><span class="nav-number">1.</span> <span class="nav-text">数据的产生</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统数据的分类"><span class="nav-number">2.</span> <span class="nav-text">系统数据的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#业务数据"><span class="nav-number">2.1.</span> <span class="nav-text">业务数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户行为数据"><span class="nav-number">2.2.</span> <span class="nav-text">用户行为数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大数据平台组件"><span class="nav-number">3.</span> <span class="nav-text">大数据平台组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公司大数据业务线"><span class="nav-number">4.</span> <span class="nav-text">公司大数据业务线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#平台架构"><span class="nav-number">5.</span> <span class="nav-text">平台架构</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" style = "text-align: center;">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+
+<div class="powered-by">
+    Powered By <a href="mailto:wuxiaohu@youzan.com">Xiaohu</a>
+</div>
+
+<div class="theme-info">
+    Technical Supported By Hexo-Themes-Next And Github
+</div>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

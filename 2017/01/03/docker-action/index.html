@@ -1,0 +1,649 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="newtry, blog " />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="基础概念images:镜像,类型软件安装包 基础指令container:容器，用于运行images docker images 查看所有的镜像 docker images rmi [image id] docker ps -[options] 查看运行或历史运行的container docker ps -a 查看所有container docker ps 当前运行的容器 docker start">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker 基础指令">
+<meta property="og:url" content="http://yoursite.com/2017/01/03/docker-action/index.html">
+<meta property="og:site_name" content="Xiaohu の Blog">
+<meta property="og:description" content="基础概念images:镜像,类型软件安装包 基础指令container:容器，用于运行images docker images 查看所有的镜像 docker images rmi [image id] docker ps -[options] 查看运行或历史运行的container docker ps -a 查看所有container docker ps 当前运行的容器 docker start">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-24T15:28:54.917Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker 基础指令">
+<meta name="twitter:description" content="基础概念images:镜像,类型软件安装包 基础指令container:容器，用于运行images docker images 查看所有的镜像 docker images rmi [image id] docker ps -[options] 查看运行或历史运行的container docker ps -a 查看所有container docker ps 当前运行的容器 docker start">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> docker 基础指令 | Xiaohu の Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xiaohu の Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                docker 基础指令
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表时间</span>
+            <time itemprop="dateCreated" datetime="2017-01-03T10:36:15+08:00" content="2017-01-03">
+              2017-01-03
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv">阅读次数
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>images:镜像,类型软件安装包</p>
+<h1 id="基础指令"><a href="#基础指令" class="headerlink" title="基础指令"></a>基础指令</h1><p>container:容器，用于运行images</p>
+<p>docker images 查看所有的镜像</p>
+<p>docker images rmi [image id]</p>
+<p>docker ps -[options] 查看运行或历史运行的container</p>
+<p>docker ps -a 查看所有container</p>
+<p>docker ps 当前运行的容器</p>
+<p>docker start -[options] [image name] 根据image启动新的container</p>
+<p>docker run -[options] [container name] 启动container</p>
+<pre><code>1.端口映射 -p [host port]:[container port]
+2.挂载本地文件 -v [host file]:[container file path]
+</code></pre><p>docker exec -[option] [container name] [command] 执行该容器下的命令</p>
+<p>docker stop [container id]  停止容器</p>
+<p>docker export [container id] &gt; [container snapshot name]  导出容器</p>
+<p>cat [container snapshot file path] | docker import - [REPOSITORY NAME]:[TAG NAME] 导入一个容器快照作为镜像，并指定名</p>
+<p>docker rm [container id] 删除一个已终止的容器 </p>
+<p>docker rm -f [container id] 强制删除一个运行中的容器 </p>
+<h1 id="image-构建"><a href="#image-构建" class="headerlink" title="image 构建"></a>image 构建</h1><p>docker 构建image有两种方式:</p>
+<pre><code>1. 从docker.io pull images
+2. 通过Dockerfile进行构建: 
+命令为 docker build . 运行该指令后，会在当前路径下搜寻名为Dockerfile文件
+</code></pre><h2 id="Dockerfile-构建images的语法简介"><a href="#Dockerfile-构建images的语法简介" class="headerlink" title="Dockerfile 构建images的语法简介:"></a>Dockerfile 构建images的语法简介:</h2><p>Dockerfile语法有两部分组成:</p>
+<pre><code>1. 注释 # comments
+2. 命令+参数: [command] [argument]
+</code></pre><h3 id="command命令"><a href="#command命令" class="headerlink" title="command命令"></a>command命令</h3><p>FROM FROM命令必须是Dockerfile的首个命令。如FROM centos:tag</p>
+<p>MAINTAINER 用于声明作者,一般放在FROM命令后面</p>
+<p>RUN 运行shell指令</p>
+<p>WORKDIR 切换工作路径</p>
+<p>CMD 设置container启动时执行的操作 有三种命令形式:</p>
+<pre><code>1. CMD [&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;] (like an exec, this is the preferred form)
+2. CMD command param1 param2 (as a shell)
+3. CMD [&quot;param1&quot;,&quot;param2&quot;] (as default parameters to ENTRYPOINT) 需使用ENTRYPOINT配合: ENTRYPOINT [&quot;executable&quot;]
+</code></pre><p>ENTRYPOINT 有两种方式:</p>
+<pre><code>1. ENTRYPOINT [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;] (like an exec, the preferred form)
+2. ENTRYPOINT command param1 param2 (as a shell)
+</code></pre><p>tips:</p>
+<pre><code>1. CMD 和 ENTRYPOINT 指令，dockerfile 只执行最后一条
+</code></pre><p>COPY image 中文件从一个路径copy到另一个路径</p>
+<p>ADD 将本地文件拷贝到image中</p>
+<p>USER 切换用户</p>
+<p>ENV 设置环境变量如: ENV JAVA_HOME /usr/bin/java</p>
+<p>EXPOSE 指定暴露端口</p>
+<p>ARG 设置构建时变量，镜像建立完成后就失效</p>
+<h1 id="docker-网络"><a href="#docker-网络" class="headerlink" title="docker 网络"></a>docker 网络</h1><h2 id="link"><a href="#link" class="headerlink" title="--link"></a>--link</h2><p>将2个容器做单向连接<br>for example<br>docker run -d --name test1 redis  根据image redis 创建容器test1</p>
+<p>docker run -d --name test2 --link test1 php 根据image php创建容器test2，并将test2 link 到 test1，使得在test2中可以通过容器名test1对其进行访问</p>
+<h2 id="docker-network"><a href="#docker-network" class="headerlink" title="docker network"></a>docker network</h2><p>为docker 容器创建一个网络，后续可以将容器加入到该网络，使网络中到容器可以通过容器名进行互相访问</p>
+<pre><code>docker network ls 查看当前docker 网络,docker 安装后有三种默认网络，分别为bridge,host,none
+none docker 启动时使用--network=none指定，容器内只能使用loopback网络设备，不会有其他网络资源
+host docker 启动时使用--network=host指定，容器使用当前宿主机的网络，容器内可以更改控制宿主机的网络
+bridge docker 启动时使用--network=bridge指定，容器使用桥接的网络。
+</code></pre><p>docker network create -d bridge my-bridge 创建一个类型为bridge，名为my-bridge的网络</p>
+<p>docker run –name mynginx –network my-bridge -p 8080:80 -d nginx:latest 指定新启动的容器mynginx的网络：网络名为my-bridge的网络</p>
+<p>docker network connect my-bridage test 手动将已运行中的容器test加入到网络my-bridge中</p>
+<p>docker network rm [network id] 删除自定义的网络</p>
+<h1 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker compose"></a>docker compose</h1><p>Compose项目是Docker官方的开源项目，负责实现对Docker容器集群的快速编排。通过使用YMAL文件配置可以定义和运行多容器的docker应用工具。然后通过一个命令，你能使用配置文件创建和运行所有的服务。</p>
+<p>参考文档:<br>1.<a href="https://docs.docker.com/engine/reference/builder/" target="_blank" rel="noopener">Dockerfile reference</a><br>2.<a href="https://www.cnblogs.com/jsonhc/p/7823286.htmlnetwork" target="_blank" rel="noopener">network</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/01/self-summary/" rel="next" title="自我总结2016">
+                <i class="fa fa-chevron-left"></i> 自我总结2016
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/03/centos-action/" rel="prev" title="centos yum源安装">
+                centos yum源安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/touxiang.jpg"
+               alt="Xiaohu" />
+          <p class="site-author-name" itemprop="name">Xiaohu</p>
+          <p class="site-description motion-element" itemprop="description">晓虎的个人博客</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础概念"><span class="nav-number">1.</span> <span class="nav-text">基础概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础指令"><span class="nav-number">2.</span> <span class="nav-text">基础指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#image-构建"><span class="nav-number">3.</span> <span class="nav-text">image 构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile-构建images的语法简介"><span class="nav-number">3.1.</span> <span class="nav-text">Dockerfile 构建images的语法简介:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#command命令"><span class="nav-number">3.1.1.</span> <span class="nav-text">command命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-网络"><span class="nav-number">4.</span> <span class="nav-text">docker 网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#link"><span class="nav-number">4.1.</span> <span class="nav-text">--link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-network"><span class="nav-number">4.2.</span> <span class="nav-text">docker network</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-compose"><span class="nav-number">5.</span> <span class="nav-text">docker compose</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" style = "text-align: center;">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+
+<div class="powered-by">
+    Powered By <a href="mailto:wuxiaohu@youzan.com">Xiaohu</a>
+</div>
+
+<div class="theme-info">
+    Technical Supported By Hexo-Themes-Next And Github
+</div>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
